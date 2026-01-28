@@ -1,15 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Custom Colors */
+  --color-lfirst-1: #222222;
+  --color-lfirst-2: #444444;
+  --color-lfirst-3: #666666;
+  --color-lfirst-4: #888888;
+  --color-lfirst-5: #aaaaaa;
+  --color-lfirst-6: #cccccc;
+  --color-lfirst-7: #eeeeee;
 
-@theme inline {
+  --color-ltwo-1: #0b4c4c;
+  --color-ltwo-2: #177777;
+  --color-ltwo-3: #22aaaa;
+  --color-ltwo-4: #2edddd;
+  --color-ltwo-5: #55eeee;
+  --color-ltwo-6: #88eeee;
+  --color-ltwo-7: #bbffff;
+
+  --color-lthree-1: #145214;
+  --color-lthree-2: #228b22;
+  --color-lthree-3: #4caf50;
+  --color-lthree-4: #7ed957;
+  --color-lthree-5: #a8e063;
+  --color-lthree-6: #c1f0c1;
+  --color-lthree-7: #e0ffe0;
+
+  --color-lfour-1: #a86a00;
+  --color-lfour-2: #c68642;
+  --color-lfour-3: #e1ad01;
+  --color-lfour-4: #ffd966;
+  --color-lfour-5: #ffe599;
+  --color-lfour-6: #ffecb3;
+  --color-lfour-7: #fff2cc;
+
+  --color-lfive-1: #800000;
+  --color-lfive-2: #b22222;
+  --color-lfive-3: #e57373;
+  --color-lfive-4: #f08080;
+  --color-lfive-5: #f4a6a6;
+  --color-lfive-6: #f8bcbc;
+  --color-lfive-7: #ffdddd;
+
+  /* Default Theme Variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {

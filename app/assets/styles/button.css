@@ -1,0 +1,19 @@
+.btn-primary {
+    background-color: var(--color-ltwo-1);
+    color: var(--color-lfirst-7);
+    font-weight: semi-bold;
+    cursor: pointer;
+    padding: 5px 50px;
+    border-radius: 12;
+    font-size: 12px;
+}
+
+
+.btn-primary:hover {
+    background-color: var(--color-lfirst-5);
+    color: var(--color-ltwo-1);
+    border-color: var(--color-ltwo-1);
+    border-style: solid;
+    border-width: 1.5px;
+    border-radius: 12;
+}
