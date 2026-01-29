@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { BsCaretDown } from "react-icons/bs";
-
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 const menuList = [
@@ -45,7 +45,29 @@ const Header = () => {
 
 
     return (
-        <div className='bg-[#151515]'>
+        <div>
+
+            <div className='bg-[#151515]'>
+                <MenuDesktop />
+                <MobileMenu />
+            </div>
+        </div>
+    )
+}
+
+type itemProps = {
+    title: string,
+    children?: itemProps[],
+    url?: string,
+}
+
+// type itemsProps = {
+//     items: itemProps[]
+// }
+
+const MenuDesktop = () => {
+    return (
+        <div className='hidden md:block'>
             <div className='flex h-20 px-5 lg:px-9 xl:px-27.5'>
                 <div className='flex-1'>
                     <div className='h-full flex items-center font-bold text-[40px] f_spartan'>
@@ -78,15 +100,49 @@ const Header = () => {
     )
 }
 
-type itemProps = {
-    title: string,
-    children?: itemProps[],
-    url?: string,
-}
+const MobileMenu = () => {
 
-// type itemsProps = {
-//     items: itemProps[]
-// }
+    const [isOpen, SetIsOpen] = useState(false);
+
+    return (
+        <div className='block md:hidden'>
+            <div className='flex w-full h-20 px-5 lg:px-9 xl:px-27.5  fixed z-50 bg-lfirst-1'>
+                <div className='flex w-full items-center cursor-pointer' onClick={() => SetIsOpen(!isOpen)}>
+                    <GiHamburgerMenu className='text-3xl' />
+                </div>
+
+                <div className='w-full flex justify-end'>
+                    <div className='flex items-center font-bold text-[22px] f_spartan'>
+                        <span className='text-lfirst-4'>TotO</span>
+                        <span className='text-ltwo-5'>-L</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {
+                isOpen && (
+                    <div className='flex flex-col h-full w-[80%] bg-lfirst-2 absolute top-20'>
+                        {
+                            menuList.map((item, index) => (
+
+                                <ItemMobileList key={item.title} item={item} />
+                            ))
+                        }
+
+                        <div className='w-full pt-6 flex items-center justify-center'>
+                            <button className='w-full mx-5 bg-ltwo-3 h-11.25 rounded-[25]'>
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+
+        </div>
+    )
+}
 
 const ItemList = ({ items }: { items: itemProps }) => {
     const [isOpen, SetIsopen] = useState(false);
@@ -136,6 +192,54 @@ const ItemList = ({ items }: { items: itemProps }) => {
     )
 
 
+}
+
+const ItemMobileList = ({ item }: { item: itemProps }) => {
+    const [isOpen, SetIsOpen] = useState(false);
+
+    return (
+        <div>
+
+            <div className='flex w-full flex-col gap 3 px-5'>
+                <div onClick={() => SetIsOpen(!isOpen)} className='h-12.25 border-dashed border-b-[0.5px] border-lfirst-4 w-full flex items-center cursor-pointer'>
+                    <div className='flex items-center w-full'>
+                        <p className='text-[18px] font-bold w-full'>{item.title}</p>
+                        {
+                            item.children && item.children.length > 0 && (
+                                <BsCaretDown className={`justify-end  ${isOpen ? 'rotate-0' : '-rotate-90'} `} />
+                            )
+                        }
+                    </div>
+
+                </div>
+
+                {
+                    isOpen && item.children && item.children.length > 0 && (
+
+                        <div>
+                            {
+                                item.children && item.children.length > 0 && (
+
+                                    <div>
+                                        {
+                                            item.children.map((child, index) => (
+
+                                                <div key={child.title} className='pl-5 h-12.25 border-dashed border-b-[0.5px] border-lfirst-4 w-full flex items-center'>
+                                                    <p className='text-[14px]'>• {child.title}</p>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+                }
+
+            </div>
+
+        </div>
+    )
 }
 
 
