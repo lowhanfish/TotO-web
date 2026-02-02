@@ -71,7 +71,25 @@ export default function Home() {
           </div>
 
         </div>
+
+
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <Image src="/images/key1.png" alt="" width={1920} height={600} className="w-full h-auto object-cover mt-20" />
+            <p>Smart Document Ingestion (RAG Technology)</p>
+            <p>Simply upload PDF files, DOCX documents, or other technical manuals. TotO-L will “learn” the content within seconds—without the need for model retraining</p>
+          </div>
+
+
+          <div className="flex-1"></div>
+          <div className="flex-1"></div>
+
+
+        </div>
+
       </div>
+
+
 
 
 
