@@ -41,13 +41,10 @@ const menuList = [
 
 
 const Header = () => {
-
-
-
     return (
         <div>
 
-            <div className='bg-[#151515]'>
+            <div className='bg-[#151515] w-full z-9999'>
                 <MenuDesktop />
                 <MobileMenu />
             </div>
@@ -105,8 +102,8 @@ const MobileMenu = () => {
     const [isOpen, SetIsOpen] = useState(false);
 
     return (
-        <div className='block md:hidden'>
-            <div className='flex w-full h-20 px-5 lg:px-9 xl:px-27.5  fixed z-50 bg-lfirst-1'>
+        <div className='block md:hidden z-9999'>
+            <div className='flex w-full h-20 px-5 lg:px-9 xl:px-27.5  fixed bg-lfirst-1 z-9999'>
                 <div className='flex w-full items-center cursor-pointer' onClick={() => SetIsOpen(!isOpen)}>
                     <GiHamburgerMenu className='text-3xl' />
                 </div>
@@ -118,15 +115,11 @@ const MobileMenu = () => {
                     </div>
                 </div>
             </div>
-
-
-
             {
                 isOpen && (
                     <div className='flex flex-col h-full w-[80%] bg-lfirst-2 absolute top-20'>
                         {
                             menuList.map((item, index) => (
-
                                 <ItemMobileList key={item.title} item={item} />
                             ))
                         }
