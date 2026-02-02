@@ -31,13 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="f_almarai flex flex-col w-full h-full bg-amber-200 text-lfirst-5 "
+        className="flex flex-col f_almarai w-full h-full bg-amber-200 text-lfirst-5 "
       >
-        <Header />
-        <div className="h-full w-full bodyLayout">
-          {children}
+
+        <div>
+          <Header />
+          <div className="h-full w-full">
+            {children}
+          </div>
+
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
