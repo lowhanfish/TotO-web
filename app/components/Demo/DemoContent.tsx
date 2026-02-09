@@ -6,14 +6,22 @@ import { BsFillSendArrowUpFill } from "react-icons/bs";
 const DemoContent = () => {
 
     const [text, setText] = useState("");
+    const [isMultiLine, setIsMultiLine] = useState(false); // State untuk kondisi style
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const target = e.target; // Langsung akses target
-
-        // Logika Auto-height
+        const target = e.target;
         target.style.height = 'auto';
-        const newHeight = Math.min(target.scrollHeight, 200);
-        target.style.height = `${newHeight}px`;
+
+        const newHeight = target.scrollHeight;
+        target.style.height = `${Math.min(newHeight, 200)}px`;
+
+        // Logika Kondisi: 
+        // Jika scrollHeight > 45 (tinggi awal 1 baris), berarti sudah masuk baris ke-2
+        if (newHeight > 45) {
+            setIsMultiLine(true);
+        } else {
+            setIsMultiLine(false);
+        }
 
         setText(target.value);
     };
@@ -22,12 +30,13 @@ const DemoContent = () => {
         <div className='w-full  p-2 flex flex-col gap-5 overflow-hidden'>
             <div className='bg-gray-200 rounded-[5] w-full h-full'>
                 <div className='overflow-scroll h-full text-lfirst-1 px-3 pt-2 pb-20'>
+                    DISINI TEMPAT TEXT
+                    {isMultiLine ? <p>(Mode Multi-line Aktif)</p> : <p>(Mode Single-line Aktif)</p>}
                     {
                         [...Array(50)].map((_, index) => (
                             <p key={index}>Ini adalah paragraf contoh nomor {index + 1}.</p>
                         ))
                     }
-                    DISINI TEMPAT TEXT
                 </div>
                 {/* SUB-BODY2 */}
                 <div className=' w-full h-full flex flex-col gap-5 justify-center items-center'>
