@@ -21,13 +21,13 @@ const DemoContent = () => {
     return (
         <div className='w-full  p-2 flex flex-col gap-5 overflow-hidden'>
             <div className='bg-gray-200 rounded-[5] w-full h-full'>
-                <div className='overflow-scroll h-full'>
+                <div className='overflow-scroll h-full text-lfirst-1 px-3 pt-2 pb-20'>
                     {
-                        [...Array(90)].map((_, index) => (
-                            <p key={index}>asdas {index}</p>
+                        [...Array(50)].map((_, index) => (
+                            <p key={index}>Ini adalah paragraf contoh nomor {index + 1}.</p>
                         ))
                     }
-
+                    DISINI TEMPAT TEXT
                 </div>
                 {/* SUB-BODY2 */}
                 <div className=' w-full h-full flex flex-col gap-5 justify-center items-center'>
