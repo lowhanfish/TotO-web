@@ -20,8 +20,8 @@ const DemoContent = () => {
 
     return (
         <div className='w-full  p-2 flex flex-col gap-5 overflow-hidden'>
-            <div className='bg-gray-500 rounded-[5] w-full h-full'>
-                <div className='bg-red-200 overflow-scroll h-full'>
+            <div className='bg-gray-200 rounded-[5] w-full h-full'>
+                <div className='overflow-scroll h-full'>
                     {
                         [...Array(90)].map((_, index) => (
                             <p key={index}>asdas {index}</p>
