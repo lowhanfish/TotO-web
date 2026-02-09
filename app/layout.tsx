@@ -34,7 +34,7 @@ export default function RootLayout({
         className="flex flex-col f_almarai w-full h-full bg-amber-200 text-lfirst-5 "
       >
 
-        <div>
+        <div className="h-full">
           <Header />
           <div className="h-full w-full">
             {children}
