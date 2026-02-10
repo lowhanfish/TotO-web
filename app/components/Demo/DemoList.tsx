@@ -23,7 +23,7 @@ const DemoList = () => {
 
                     [...Array(30)].map((_, index) => (
 
-                        <div className='flex p-2 pl-5 border-b border-lfirst-6/20 gap-2 items-center justify-between'>
+                        <div key={index} className='flex p-2 pl-5 border-b border-lfirst-6/20 gap-2 items-center justify-between'>
                             <div className='text-[12px] line-clamp-2 cursor-pointer'>
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis tenetur fuga reprehenderit corrupti fugit suscipit similique vitae laboriosam a inventore, dolorem eligendi ducimus, consequatur sint veritatis modi doloribus? Optio, laboriosam.
                             </div>
