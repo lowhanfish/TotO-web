@@ -1,4 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+
+
+
 import Why from "./components/Home/Why";
 import KeyFeatures from "./components/Home/KeyFeatures";
 
@@ -28,12 +32,12 @@ export default function Home() {
 
           <div className="mt-7.5 flex gap-5 justify-center md:justify-start">
 
-            <button className=" bg-ltwo-2 h-11.25 rounded-[25px] w-40 text-white border-white border-4 hover:bg-lfirst-7   hover:border-ltwo-2 hover:text-ltwo-2 cursor-pointer">
+            <Link href="/demo" className="flex justify-center items-center bg-ltwo-2 h-11.25 rounded-[25px] w-40 text-white border-white border-4 hover:bg-lfirst-7   hover:border-ltwo-2 hover:text-ltwo-2 cursor-pointer">
               Demo
-            </button>
-            <button className=" bg-lfirst-7 border-4 border-ltwo-2 text-ltwo-2 h-11.25 rounded-[25px] w-40 hover:bg-ltwo-2 hover:text-white hover:border-white cursor-pointer">
+            </Link>
+            <Link href="/demo" className="flex justify-center items-center bg-lfirst-7 border-4 border-ltwo-2 text-ltwo-2 h-11.25 rounded-[25px] w-40 hover:bg-ltwo-2 hover:text-white hover:border-white cursor-pointer">
               Get Started
-            </button>
+            </Link>
 
 
           </div>

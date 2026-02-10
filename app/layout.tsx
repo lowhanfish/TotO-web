@@ -31,10 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="flex flex-col f_almarai w-full h-full bg-amber-200 text-lfirst-5 "
+        className="flex flex-col f_almarai w-full  bg-amber-200 text-lfirst-5 "
       >
 
-        <div className="h-full">
+        <div className="h-full w-full fixed overflow-scroll">
           <Header />
           <div className="h-full w-full">
             {children}

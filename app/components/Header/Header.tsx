@@ -1,7 +1,7 @@
 "use client"
 
+import { useState } from 'react'
 import Link from 'next/link';
-import React, { useState } from 'react'
 import { BsCaretDown } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -11,17 +11,32 @@ const menuList = [
         title: "Product",
         url: "/",
         children: [
-            { title: "API-L" },
-            { title: "Public Services" },
+            {
+                title: "API-L",
+                url: "/api-l"
+            },
+            {
+                title: "Public Services",
+                url: "/public-services"
+            },
         ],
     },
     {
         title: "Docs",
         url: "/docs",
         children: [
-            { title: "API-L Docs" },
-            { title: "Embedding Data" },
-            { title: "Public Services Docs" },
+            {
+                title: "API-L Docs",
+                url: "/api-l-docs"
+            },
+            {
+                title: "Embedding Data",
+                url: "/embedding-data"
+            },
+            {
+                title: "Public Services Docs",
+                url: "/public-services-docs"
+            },
         ],
     },
     {
@@ -67,10 +82,10 @@ const MenuDesktop = () => {
         <div className='hidden md:block'>
             <div className='flex h-20 px-5 lg:px-9 xl:px-27.5'>
                 <div className='flex-1'>
-                    <div className='h-full flex items-center font-bold text-[40px] f_spartan'>
+                    <Link href="/" className='h-full flex items-center font-bold text-[40px] f_spartan cursor-pointer'>
                         <span className='text-lfirst-4'>TotO</span>
                         <span className='text-ltwo-5'>-L</span>
-                    </div>
+                    </Link>
                 </div>
                 <div className='flex-1'>
                     <div className='flex justify-center items-center h-full'>
@@ -109,10 +124,10 @@ const MobileMenu = () => {
                 </div>
 
                 <div className='w-full flex justify-end'>
-                    <div className='flex items-center font-bold text-[22px] f_spartan'>
+                    <Link href="/" className='flex items-center font-bold text-[22px] f_spartan'>
                         <span className='text-lfirst-4'>TotO</span>
                         <span className='text-ltwo-5'>-L</span>
-                    </div>
+                    </Link>
                 </div>
             </div>
             {
