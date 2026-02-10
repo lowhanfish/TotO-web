@@ -26,6 +26,7 @@ export default function Home() {
               The Smart Digital Attendant That Speaks Your Language.
             </span>
           </p>
+          <p className="text-[12px] italic mt-1">(Teknologi Otomasi Tata Organisasi Lokal)</p>
           <p className="mt-5.25 f_almarai">
             "Transform rigid regulations and complex SOPs into friendly, natural conversations. TotO-L is your 24/7 virtual assistant, engineered to understand regulatory contexts with precision—even responding in local dialects."
           </p>
