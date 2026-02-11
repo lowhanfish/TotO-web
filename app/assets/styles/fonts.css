@@ -53,13 +53,21 @@
   font-display: swap;
 }
 
+.prose strong {
+  font-weight: bold;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
 
 .f_spartan {
-  /* font-family: 'League Spartan', sans-serif; */
+  font-family: 'League Spartan', sans-serif;
 }
 
 .f_almarai {
-  /* font-family: 'Almarai', sans-serif; */
+  font-family: 'Almarai', sans-serif;
 }
 
 .f_title {
