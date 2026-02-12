@@ -6,6 +6,8 @@ import { useState, useEffect, ChangeEvent, useRef } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { BsFillSendArrowUpFill, BsFillPencilFill, BsCopy } from "react-icons/bs";
 import DemoContentEmpty from './DemoContentEmpty';
+import Image from 'next/image';
+
 
 // Struktur data pesan
 interface Message {
@@ -90,22 +92,39 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
 
     return (
         <div className='w-full h-full p-2 flex flex-col gap-5 overflow-hidden mt-5 md:mt-2'>
-            <div className='bg-gray-200 rounded-[5px] w-full h-full py-2 relative flex flex-col'>
+            <div className='bg-gray-200 rounded-[5px] w-full h-full py-2  flex flex-col '>
 
                 {/* AREA CHAT */}
                 <div className='flex-1 overflow-y-auto text-[13px] text-lfirst-1 px-7 pt-2 pb-32'>
                     <div className='flex flex-col gap-4'>
 
                         {/* Tampilkan Loading saat ambil riwayat */}
-                        {isLoading && messages.length === 0 ? (
-                            <div className="text-center py-10 animate-pulse text-lfirst-3">Memuat riwayat chat, iye'...</div>
+
+                        <div className='relative flex h-full w-full justify-center items-center'>
+                            <div className='flex h-full flex-col justify-center items-center absolute w-full  bg-gray-200 z-10'>
+                                <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
+                                <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        {/* {isLoading && messages.length === 0 ? (
+                            <div className='flex h-full flex-col justify-center items-center absolute top-0 left-0 w-full  bg-gray-200 z-10'>
+                                <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
+                                <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
+
+                            </div>
+
                         ) : messages.length === 0 && !mutation.isPending && (
                             <DemoContentEmpty />
                         )}
 
                         {messages.map((msg, index) => (
                             <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full`}>
-                                <div className={`${msg.role === 'user' ? 'bg-lfirst-3 text-lfirst-7 self-end' : 'bg-white text-black self-start shadow-sm'} p-4 rounded-[12px] max-w-[85%] lg:max-w-[70%]`}>
+                                <div className={`${msg.role === 'user' ? 'bg-lfirst-3 text-lfirst-7 self-end' : 'bg-white text-black self-start shadow-sm'} p-4 rounded-xl max-w-[85%] lg:max-w-[70%]`}>
                                     <ReactMarkdown
                                         components={{
                                             p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
@@ -126,7 +145,7 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        ))} */}
 
                         {mutation.isPending && (
                             <div className='self-start bg-white p-3 rounded-xl shadow-sm animate-pulse flex items-center gap-2'>
@@ -141,41 +160,44 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
                 </div>
 
                 {/* AREA INPUT FIXED */}
-                <div className='absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-gray-200 via-gray-200 to-transparent'>
-                    <div className='flex justify-center items-center'>
-                        <div className={`
+                <div className='relative'>
+
+                    <div className='absolute bottom-0 left-0 w-full p-4 bg-linear-to-t from-gray-200 via-gray-200 to-transparent'>
+                        <div className='flex justify-center items-center'>
+                            <div className={`
                             bg-white rounded-[15px] 
                             border-2 border-lfirst-6 w-[95%] 
                             md:w-[75%] shadow-lg
                             flex items-end p-2
                             transition-all duration-200
                         `}>
-                            <textarea
-                                value={text}
-                                onChange={handleChange}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter' && !e.shiftKey) {
-                                        e.preventDefault();
-                                        handleKirim();
-                                    }
-                                }}
-                                rows={1}
-                                placeholder="Tanyakan tentang regulasi daerah..."
-                                className='w-full text-[14px] text-lfirst-2 p-2 bg-transparent resize-none focus:outline-none max-h-[150px] overflow-y-auto'
-                            ></textarea>
+                                <textarea
+                                    value={text}
+                                    onChange={handleChange}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault();
+                                            handleKirim();
+                                        }
+                                    }}
+                                    rows={1}
+                                    placeholder="Tanyakan tentang regulasi daerah..."
+                                    className='w-full text-[14px] text-lfirst-2 p-2 bg-transparent resize-none focus:outline-none max-h-37.5 overflow-y-auto'
+                                ></textarea>
 
-                            <div className='pb-1 pr-1'>
-                                <button
-                                    onClick={handleKirim}
-                                    disabled={mutation.isPending || !text.trim()}
-                                    className={`
+                                <div className='pb-1 pr-1'>
+                                    <button
+                                        onClick={handleKirim}
+                                        disabled={mutation.isPending || !text.trim()}
+                                        className={`
                                         h-9 w-9 rounded-full flex justify-center items-center 
                                         transition-all duration-200
                                         ${mutation.isPending || !text.trim() ? 'bg-gray-300' : 'bg-lfirst-2 hover:bg-lfirst-3 cursor-pointer shadow-md'}
                                     `}
-                                >
-                                    <BsFillSendArrowUpFill className='text-white' />
-                                </button>
+                                    >
+                                        <BsFillSendArrowUpFill className='text-white' />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
