@@ -85,6 +85,17 @@ const DemoContent = () => {
                 {/* AREA CHAT */}
                 <div className='flex-1 overflow-y-auto text-[13px] text-lfirst-1 px-7 pt-2 pb-32'>
                     <div className='flex flex-col gap-4'>
+
+                        {
+                            messages.length === 0 && !mutation.isPending && (
+                                <div className='text-center text-gray-500 italic mt-20'>
+                                    Mulai percakapan dengan menanyakan tentang regulasi daerah...
+                                </div>
+                            )
+                        }
+
+
+
                         {messages.map((msg, index) => (
                             <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full`}>
                                 <div className={`${msg.role === 'user' ? 'bg-lfirst-3 text-lfirst-7 self-end' : 'bg-white text-black self-start shadow-sm'} p-4 rounded-[12px] max-w-[85%] lg:max-w-[70%]`}>
@@ -111,7 +122,7 @@ const DemoContent = () => {
                         ))}
 
                         {mutation.isPending && (
-                            <div className='self-start bg-white p-3 rounded-[12px] shadow-sm animate-pulse flex items-center gap-2'>
+                            <div className='self-start bg-white p-3 rounded-xl shadow-sm animate-pulse flex items-center gap-2'>
                                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-.3s]"></div>
                                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-.5s]"></div>
