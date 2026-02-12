@@ -32,9 +32,7 @@ const DemoList = () => {
                             </div>
                         </div>
                     ))
-
                 }
-
 
                 <div className='flex p-2 border-b border-lfirst-6/20 gap-2 items-center justify-center cursor-pointer mb-10'>
                     <p>Load More ..</p>

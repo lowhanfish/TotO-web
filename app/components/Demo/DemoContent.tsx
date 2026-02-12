@@ -5,7 +5,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useState, useEffect, ChangeEvent, useRef } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { BsFillSendArrowUpFill, BsFillPencilFill, BsCopy } from "react-icons/bs";
-
+import DemoContentEmpty from './DemoContentEmpty';
+DemoContentEmpty
 // Struktur data pesan
 interface Message {
     role: 'user' | 'assistant';
@@ -88,13 +89,9 @@ const DemoContent = () => {
 
                         {
                             messages.length === 0 && !mutation.isPending && (
-                                <div className='text-center text-gray-500 italic mt-20'>
-                                    Mulai percakapan dengan menanyakan tentang regulasi daerah...
-                                </div>
+                                <DemoContentEmpty />
                             )
                         }
-
-
 
                         {messages.map((msg, index) => (
                             <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full`}>
