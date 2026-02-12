@@ -1,45 +1,54 @@
 'use client'
 
-import { AskTotO } from '@/app/services/api';
-import { useMutation } from '@tanstack/react-query';
+import { AskTotO, GetChatHistory } from '@/app/services/api'; // Tambahkan import history
+import { useMutation, useQuery } from '@tanstack/react-query'; // Tambahkan useQuery
 import { useState, useEffect, ChangeEvent, useRef } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { BsFillSendArrowUpFill, BsFillPencilFill, BsCopy } from "react-icons/bs";
 import DemoContentEmpty from './DemoContentEmpty';
-DemoContentEmpty
+
 // Struktur data pesan
 interface Message {
     role: 'user' | 'assistant';
     content: string;
 }
 
-const DemoContent = () => {
+// Gabungkan interface props agar tidak merah
+interface DemoContentProps {
+    sessionId: string | null;
+    onNewMessageSaved: () => void;
+}
+
+const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
     const [text, setText] = useState("");
     const [isMultiLine, setIsMultiLine] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
-    const [sessionId, setSessionId] = useState<string>("");
 
     const scrollEndRef = useRef<HTMLDivElement>(null);
 
-    // 1. Inisialisasi Session ID (Aman untuk Next.js Client Side)
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            let storedId = localStorage.getItem('toto_session_id');
-            if (!storedId) {
-                // Buat ID unik sederhana jika uuid belum terinstall
-                storedId = 'toto-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
-                localStorage.setItem('toto_session_id', storedId);
-            }
-            setSessionId(storedId);
-        }
-    }, []);
+    // 1. Ambil data history dari MySQL lewat API
+    const { data: chatData, isLoading } = useQuery({
+        queryKey: ['chat-history', sessionId],
+        queryFn: () => GetChatHistory(sessionId!),
+        enabled: !!sessionId,
+    });
 
-    // 2. React Query Mutation
+    // 2. Sinkronkan history ke dalam layar saat sessionId berubah atau data datang
+    useEffect(() => {
+        if (chatData) {
+            setMessages(chatData);
+        } else {
+            setMessages([]);
+        }
+    }, [chatData, sessionId]);
+
+    // 3. React Query Mutation untuk chat baru
     const mutation = useMutation({
         mutationFn: (vars: { prompt: string, session_id: string }) => AskTotO(vars.prompt, vars.session_id),
         onSuccess: (data) => {
-            // Masukkan jawaban asisten ke daftar pesan
             setMessages((prev) => [...prev, { role: 'assistant', content: data.answer }]);
+            // Trigger agar Sidebar refresh judul
+            if (onNewMessageSaved) onNewMessageSaved();
         },
         onError: (error) => {
             console.error("Error koneksi:", error);
@@ -68,13 +77,13 @@ const DemoContent = () => {
         if (!text.trim() || mutation.isPending) return;
 
         const currentPrompt = text;
-        // Masukkan pesan user ke layar
         setMessages((prev) => [...prev, { role: 'user', content: currentPrompt }]);
 
-        // Kirim ke Backend Python
-        mutation.mutate({ prompt: currentPrompt, session_id: sessionId });
+        mutation.mutate({
+            prompt: currentPrompt,
+            session_id: sessionId || "default-session"
+        });
 
-        // Kosongkan input & reset height
         setText("");
         setIsMultiLine(false);
     };
@@ -87,11 +96,12 @@ const DemoContent = () => {
                 <div className='flex-1 overflow-y-auto text-[13px] text-lfirst-1 px-7 pt-2 pb-32'>
                     <div className='flex flex-col gap-4'>
 
-                        {
-                            messages.length === 0 && !mutation.isPending && (
-                                <DemoContentEmpty />
-                            )
-                        }
+                        {/* Tampilkan Loading saat ambil riwayat */}
+                        {isLoading && messages.length === 0 ? (
+                            <div className="text-center py-10 animate-pulse text-lfirst-3">Memuat riwayat chat, iye'...</div>
+                        ) : messages.length === 0 && !mutation.isPending && (
+                            <DemoContentEmpty />
+                        )}
 
                         {messages.map((msg, index) => (
                             <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full`}>
