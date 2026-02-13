@@ -98,23 +98,18 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
                 <div className='flex-1 overflow-y-auto text-[13px] text-lfirst-1 px-7 pt-2 pb-32'>
                     <div className='flex flex-col gap-4'>
 
+
+
+
+
                         {/* Tampilkan Loading saat ambil riwayat */}
+                        {isLoading && messages.length === 0 ? (
 
-                        <div className='relative flex h-full w-full justify-center items-center'>
-                            <div className='flex h-full flex-col justify-center items-center absolute w-full  bg-gray-200 z-10'>
-                                <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
-                                <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
-
-                            </div>
-
-                        </div>
-
-
-
-                        {/* {isLoading && messages.length === 0 ? (
-                            <div className='flex h-full flex-col justify-center items-center absolute top-0 left-0 w-full  bg-gray-200 z-10'>
-                                <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
-                                <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
+                            <div className='flex h-full w-full justify-center items-center mt-[10%]'>
+                                <div className='flex h-full w-full flex-col justify-center items-center '>
+                                    <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
+                                    <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
+                                </div>
 
                             </div>
 
@@ -123,7 +118,7 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
                         )}
 
                         {messages.map((msg, index) => (
-                            <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full`}>
+                            <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full h-fit`}>
                                 <div className={`${msg.role === 'user' ? 'bg-lfirst-3 text-lfirst-7 self-end' : 'bg-white text-black self-start shadow-sm'} p-4 rounded-xl max-w-[85%] lg:max-w-[70%]`}>
                                     <ReactMarkdown
                                         components={{
@@ -145,7 +140,7 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
                                     </div>
                                 </div>
                             </div>
-                        ))} */}
+                        ))}
 
                         {mutation.isPending && (
                             <div className='self-start bg-white p-3 rounded-xl shadow-sm animate-pulse flex items-center gap-2'>
