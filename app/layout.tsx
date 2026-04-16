@@ -38,7 +38,7 @@ export default function RootLayout({
       >
 
         <Providers>
-          <div className="h-full w-full fixed overflow-scroll">
+          <div className="h-full w-full">
             <Header />
             <div className="h-full w-full">
               {children}
