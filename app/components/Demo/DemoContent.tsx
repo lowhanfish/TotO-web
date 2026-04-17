@@ -8,7 +8,6 @@ import { BsFillSendArrowUpFill, BsFillPencilFill, BsCopy } from "react-icons/bs"
 import DemoContentEmpty from './DemoContentEmpty';
 import Image from 'next/image';
 
-
 // Struktur data pesan
 interface Message {
     role: 'user' | 'assistant';
@@ -21,41 +20,37 @@ interface DemoContentProps {
     onNewMessageSaved: () => void;
 }
 
-const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
+const DemoContent = () => {
     const [text, setText] = useState("");
     const [isMultiLine, setIsMultiLine] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
 
     const scrollEndRef = useRef<HTMLDivElement>(null);
 
-    // 1. Ambil data history dari MySQL lewat API
-    const { data: chatData, isLoading } = useQuery({
-        queryKey: ['chat-history', sessionId],
-        queryFn: () => GetChatHistory(sessionId!),
-        enabled: !!sessionId,
-    });
+
 
     // 2. Sinkronkan history ke dalam layar saat sessionId berubah atau data datang
     useEffect(() => {
-        if (chatData) {
-            setMessages(chatData);
-        } else {
-            setMessages([]);
-        }
-    }, [chatData, sessionId]);
+        // if (chatData) {
+        //     setMessages(chatData);
+        // } else {
+        //     setMessages([]);
+        // }
+        // }, [chatData, sessionId]);
+    }, []);
 
     // 3. React Query Mutation untuk chat baru
     const mutation = useMutation({
-        mutationFn: (vars: { prompt: string, session_id: string }) => AskTotO(vars.prompt, vars.session_id),
-        onSuccess: (data) => {
-            setMessages((prev) => [...prev, { role: 'assistant', content: data.answer }]);
-            // Trigger agar Sidebar refresh judul
-            if (onNewMessageSaved) onNewMessageSaved();
-        },
-        onError: (error) => {
-            console.error("Error koneksi:", error);
-            alert("Terjadi kesalahan teknis, Iye'. Cek koneksi Backend!");
-        }
+        // mutationFn: (vars: { prompt: string, session_id: string }) => AskTotO(vars.prompt, vars.session_id),
+        // onSuccess: (data) => {
+        //     setMessages((prev) => [...prev, { role: 'assistant', content: data.answer }]);
+        //     // Trigger agar Sidebar refresh judul
+        //     if (onNewMessageSaved) onNewMessageSaved();
+        // },
+        // onError: (error) => {
+        //     console.error("Error koneksi:", error);
+        //     alert("Terjadi kesalahan teknis, Iye'. Cek koneksi Backend!");
+        // }
     });
 
     const scrollToBottom = () => {
@@ -64,7 +59,8 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages, mutation.isPending]);
+    }, []);
+    // }, [messages, mutation.isPending]);
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const target = e.target;
@@ -76,46 +72,36 @@ const DemoContent = ({ sessionId, onNewMessageSaved }: DemoContentProps) => {
     };
 
     const handleKirim = () => {
-        if (!text.trim() || mutation.isPending) return;
+        // if (!text.trim() || mutation.isPending) return;
 
-        const currentPrompt = text;
-        setMessages((prev) => [...prev, { role: 'user', content: currentPrompt }]);
+        // const currentPrompt = text;
+        // setMessages((prev) => [...prev, { role: 'user', content: currentPrompt }]);
 
-        mutation.mutate({
-            prompt: currentPrompt,
-            session_id: sessionId || "default-session"
-        });
+        // mutation.mutate({
+        //     prompt: currentPrompt,
+        //     session_id: sessionId || "default-session"
+        // });
 
-        setText("");
-        setIsMultiLine(false);
+        // setText("");
+        // setIsMultiLine(false);
     };
 
     return (
-        <div className='w-full h-full p-2 flex flex-col gap-5 overflow-hidden mt-5 md:mt-2'>
+        <div className='w-full h-full p-2 flex flex-col gap-5 overflow-hidden mt-5 md:mt-0'>
             <div className='bg-gray-200 rounded-[5px] w-full h-full py-2  flex flex-col '>
 
                 {/* AREA CHAT */}
                 <div className='flex-1 overflow-y-auto text-[13px] text-lfirst-1 px-7 pt-2 pb-32'>
                     <div className='flex flex-col gap-4'>
 
-
-
-
-
-                        {/* Tampilkan Loading saat ambil riwayat */}
-                        {isLoading && messages.length === 0 ? (
-
-                            <div className='flex h-full w-full justify-center items-center mt-[10%]'>
-                                <div className='flex h-full w-full flex-col justify-center items-center '>
-                                    <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
-                                    <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
-                                </div>
-
+                        {/* <div className='flex h-full w-full justify-center items-center mt-[10%]'>
+                            <div className='flex h-full w-full flex-col justify-center items-center '>
+                                <Image src="/images/loading.gif" alt="Loading" width={150} height={150} className="mx-auto rounded-[100%] border-5 border-lfirst-6" />
+                                <div className="f_spartan text-center text-[20px] animate-pulse text-lfirst-3 font-light">Tabe' Memuat riwayat chat...</div>
                             </div>
 
-                        ) : messages.length === 0 && !mutation.isPending && (
-                            <DemoContentEmpty />
-                        )}
+                        </div> */}
+                        <DemoContentEmpty />
 
                         {messages.map((msg, index) => (
                             <div key={index} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} w-full h-fit`}>

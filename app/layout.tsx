@@ -34,17 +34,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="flex flex-col f_almarai w-full  bg-amber-200 text-lfirst-5 "
+        className=" f_almarai w-full  bg-amber-200 text-lfirst-5 "
       >
 
         <Providers>
-          <div className="h-full w-full">
-            <Header />
-            <div className="h-full w-full">
-              {children}
+          <div className="flex flex-col relative overflow-scroll">
+            <div className="h-auto w-full">
+              <Header />
+              <div className="h-full w-full">
+                {children}
+              </div>
             </div>
+            <Footer />
+
           </div>
-          <Footer />
         </Providers>
 
       </body>

@@ -39,28 +39,21 @@ const DemoList = ({ histories, activeSessionId, onCreateNew }: DemoListProps) =>
                 </div>
 
                 <div className='flex flex-col'>
-                    {histories.length > 0 ? (
-                        histories.map((item) => (
-                            <Link
-                                key={item.session_id}
-                                // Sesuaikan path "/demo" dengan rute Next.js Bapak
-                                href={`/demo?session=${item.session_id}`}
-                                className={`flex p-2 pl-5 border-b border-lfirst-6/20 gap-2 items-center justify-between hover:bg-lfirst-6/10 transition-colors ${activeSessionId === item.session_id ? 'bg-lfirst-6/30 border-l-4 border-l-ltwo-1' : ''
-                                    }`}
-                            >
-                                <div className='text-[12px] line-clamp-2 cursor-pointer'>
-                                    {item.title || "Percakapan Tanpa Judul"}
-                                </div>
-                                <div className='flex items-center cursor-pointer p-1 hover:bg-white/10 rounded-full'>
-                                    <BsThreeDotsVertical />
-                                </div>
-                            </Link>
-                        ))
-                    ) : (
-                        <div className='text-[12px] text-center py-10 text-gray-400 italic'>
-                            Belum ada riwayat, iye'.
+
+                    <Link
+
+                        // Sesuaikan path "/demo" dengan rute Next.js Bapak
+                        href={`/demo`}
+                        className={`flex p-2 pl-5 border-b border-lfirst-6/20 gap-2 items-center justify-between hover:bg-lfirst-6/10 transition-colors bg-lfirst-6/30 border-l-4 border-l-ltwo-1'`}
+                    >
+                        <div className='text-[12px] line-clamp-2 cursor-pointer'>
+                            contoh percakapan
                         </div>
-                    )}
+                        <div className='flex items-center cursor-pointer p-1 hover:bg-white/10 rounded-full'>
+                            <BsThreeDotsVertical />
+                        </div>
+                    </Link>
+
                 </div>
 
                 {/* <div className='flex p-2 border-b border-lfirst-6/20 gap-2 items-center justify-center cursor-pointer mb-10 hover:text-ltwo-1 transition-colors'>
