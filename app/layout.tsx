@@ -7,6 +7,7 @@ import './assets/styles/index.css';
 import './assets/styles/fonts.css';
 import './assets/styles/button.css';
 import Providers from "./components/Providers";
+import FooterWraper from "./components/Footer/FooterWraper";
 
 
 
@@ -45,7 +46,7 @@ export default function RootLayout({
                 {children}
               </div>
             </div>
-            <Footer />
+            <FooterWraper />
 
           </div>
         </Providers>

@@ -52,7 +52,7 @@ const Footer = () => {
             <div className='flex-2'>
                 <div className='flex flex-col md:flex-row gap-2 text-center md:text-left'>
                     <div className='flex-1 pb-5'>
-                        <p className='text-[16px] font-bold text-ltwo-5'>SOLUTIONS</p>
+                        <p className='text-[16px] font-bold text-ltwo-6'>SOLUTIONS</p>
                         <div className='text-[12px] pt-2 flex flex-col gap-1'>
                             <Link href="/"><p>Government</p></Link>
                             <Link href="/"><p>Business</p></Link>
@@ -61,7 +61,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='flex-1 pb-5'>
-                        <p className='text-[16px] font-bold text-ltwo-5'>PLATFORM</p>
+                        <p className='text-[16px] font-bold text-ltwo-6'>PLATFORM</p>
                         <div className='text-[12px] pt-2 flex flex-col gap-1'>
                             <Link href="/"><p>AI Assistant</p></Link>
                             <Link href="/"><p>WhatsApp Automation</p></Link>
@@ -71,7 +71,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='flex-1'>
-                        <p className='text-[16px] font-bold text-ltwo-5'>RESOURCES</p>
+                        <p className='text-[16px] font-bold text-ltwo-6'>RESOURCES</p>
                         <div className='text-[12px] pt-2 flex flex-col gap-1'>
                             <Link href="/"><p>Documentation</p></Link>
                             <Link href="/"><p>API Reference</p></Link>
@@ -80,7 +80,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='flex-1'>
-                        <p className='text-[16px] font-bold text-ltwo-5'>LEGAL</p>
+                        <p className='text-[16px] font-bold text-ltwo-6'>LEGAL</p>
                         <div className='text-[12px] pt-2 flex flex-col gap-1'>
                             <Link href="/"><p>Privacy Policy</p></Link>
                             <Link href="/"><p>Terms of Service</p></Link>
