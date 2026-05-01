@@ -3,6 +3,7 @@ import Link from "next/link";
 import Why from "./components/Home/Why";
 import KeyFeatures from "./components/Home/KeyFeatures";
 import HeaderHome from "./components/Home/HeaderHome";
+import Pricing from "./components/Home/Pricing";
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <Why />
 
         <KeyFeatures />
+        <Pricing />
 
       </div>
 
